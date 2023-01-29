@@ -1,11 +1,15 @@
 package com.example.boot;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+@Component
 public class BootController extends TelegramLongPollingBot {
     @Override
     public String getBotUsername() {
@@ -38,11 +42,9 @@ public class BootController extends TelegramLongPollingBot {
                 String response = parseMessage(inMess.getText());
                 //Создаем объект класса SendMessage - наш будущий ответ пользователю
                 SendMessage outMess = new SendMessage();
-
                 //Добавляем в наше сообщение id чата а также наш ответ
                 outMess.setChatId(chatId);
                 outMess.setText(response);
-
                 //Отправка в чат
                 execute(outMess);
             }
@@ -52,11 +54,9 @@ public class BootController extends TelegramLongPollingBot {
     }
     public String parseMessage(String textMsg) {
         String response = null;
-
-        //Сравниваем текст пользователя с нашими командами, на основе этого формируем ответ
         if(textMsg.equals("/start"))
 
-            response = "";
+            response = "dl";
 
         return response ;
     }
